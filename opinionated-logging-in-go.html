@@ -26,7 +26,7 @@
 	<p>They've "Worked For Me"&#8482; in a microservice-based architecture serving tens of thousands of computationally-intense requests per second.</p>
 
 		<h2>1. Your Happy Path is a Metric</h2>
-		<img src="1/rps.jpg"/>
+		<img src="opinionated-logging-in-go/rps.jpg"/>
 		<p>The 'Happy' path through your webapp (2xx response) shouldn't have any logging on it. The only things you care about here are how often it was hit and how long it took to serve a response.</p>
 
 		<h2>2. Throw away Levels</h2>
@@ -40,7 +40,7 @@
 			<li><strong>ERROR</strong> - Something may or may not have gone wrong</li>
 		</ul>
 		<p>But the only reason you're looking at logs in the first place is because something's gone wrong. AKA an error. And so:</p>
-		<img src="1/you-dont-need-levels.jpg"/>
+		<img src="opinionated-logging-in-go/you-dont-need-levels.jpg"/>
 
 		<p>Because we're writing webapps, the definition of "something's gone wrong" is "we're returning an HTTP error code". For everything else (e.g retrying failed calls to external APIs), put metrics around it.</p>
 
@@ -50,7 +50,7 @@
 
 		<h2>4. Log with context</h2>
 		<p>Now that you're logging in a single place, it's easy to make sure that your log lines include some context to help you reproduce errors. This means no more tears and recrimination when you hit this in Production:</p> 
-		<img src="1/baderror.png"/>
+		<img src="opinionated-logging-in-go/baderror.png"/>
 		<p>As a minimum, I go for:</p>
 		<ul>
 			<li>Timestamp</li>
@@ -61,7 +61,7 @@
 			<li>Any relevant HTTP headers / body</li>
 		</ul>
 		<p>If you're doing <a href="https://stackify.com/what-is-structured-logging-and-why-developers-need-it/">structured logging</a> (and if you're not, why not?) this context will also be useful for quickly tracking down bad subnets/resources/users.</p>
-		<img src="1/aggregated.jpg"/>
+		<img src="opinionated-logging-in-go/aggregated.jpg"/>
 
 		<h2>5. Link log lines across services</h2>
 
