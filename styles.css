@@ -66,6 +66,7 @@ img {
   margin: 0 auto;
   border: 1px solid #69c;
   display: block;
+  max-width: 90%;
 }
 
 code {
