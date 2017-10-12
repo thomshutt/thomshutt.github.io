@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Thom Shutt - Blog</title>
+  <meta name="description" content="Blog">
+  <meta name="author" content="Thom Shutt">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<header>
+		<h1>5 (Opinionated) Steps to Minimalist Logging In Go</h1>
+		<p>
+		<a href="https://github.com/thomshutt">by Thom Shutt</a>
+		</p>
+	</header>
+	
+	<main>
+	<p>In many ways Go is a clean break from our past programming sins, but it feels as though logging is still an area where people cling on to unnecessary practices from other languages.</p>
+	<p>After realising the logging we were generating from a recent project was unusable (tens of lines per request, many of which either dumped out entire structs or had no usable information), I implemented the following steps.</p>
+	<p>They've "Worked For Me"&#8482; in a microservice-based architecture serving tens of thousands of computationally-intense requests per second.</p>
+
+		<h2>1. Your Happy Path is a Metric</h2>
+		<img src="1/rps.jpg"/>
+		<p>The 'Happy' path through your webapp (2xx response) shouldn't have any logging on it. The only things you care about here are how often it was hit and how long it took to serve a response.</p>
+
+		<h2>2. Throw away Levels</h2>
+		<p>When was the last time you ran Production at anything other than Info? Is changing the level a quick process that everyone on the team knows how to do?</p>
+		<p>Despite this, scrapping levels is always the step that people are most uncomfortable with.</p> 
+		<p>In reality, this is how levels are used:</p>
+		<ul>
+			<li><strong>INFO</strong> - This might be useful someday</li>
+			<li><strong>WARN</strong> - I don't want to think about error handling</li>
+			<li><strong>DEBUG</strong> - I don't want to think about logging</li>
+			<li><strong>ERROR</strong> - Something may or may not have gone wrong</li>
+		</ul>
+		<p>But the only reason you're looking at logs in the first place is because something's gone wrong. AKA an error. And so:</p>
+		<img src="1/you-dont-need-levels.jpg"/>
+
+		<p>Because we're writing webapps, the definition of "something's gone wrong" is "we're returning an HTTP error code". For everything else (e.g retrying failed calls to external APIs), put metrics around it.</p>
+
+		<h2>3. Log at the edge of your system</h2>
+		<p>Your logging code should live in one place at the edge of your webapp, ideally as a middleware that kicks in just before an error response is returned to the user. You're now free from bloating up your method signatures / structs with loggers.</p>
+		<p>This also ties in perfectly with Go's pattern of passing errors up the call stack until something can handle it.</p>
+
+		<h2>4. Log with context</h2>
+		<p>Now that you're logging in a single place, it's easy to make sure that your log lines include some context to help you reproduce errors. This means no more tears and recrimination when you hit this in Production:</p> 
+		<img src="1/baderror.png"/>
+		<p>As a minimum, I go for:</p>
+		<ul>
+			<li>Timestamp</li>
+			<li>Microservice Name</li>
+			<li>URL requested</li>
+			<li>Information about exactly where in The Cloud the request hit</li>
+			<li>Some way of identifying the user</li>
+			<li>Any relevant HTTP headers / body</li>
+		</ul>
+		<p>If you're doing <a href="https://stackify.com/what-is-structured-logging-and-why-developers-need-it/">structured logging</a> (and if you're not, why not?) this context will also be useful for quickly tracking down bad subnets/resources/users.</p>
+		<img src="1/aggregated.jpg"/>
+
+		<h2>5. Link log lines across services</h2>
+
+		<p>Generate a unique request ID in any user-facing services and then pass that around internally. This will let you correlate log lines - e.g:</p>
+		<ul>
+			<li>Service A logs that it got a 500 from internal service B on Request ID abc-123</li>
+			<li>Service B logs that Amazon S3 was unreachable on Request ID abc-123</li>
+		</ul>
+	</main>
+</body>
+
+</html>
