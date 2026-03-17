@@ -6,6 +6,10 @@ body {
   padding: 0;
 }
 
+h1 {
+  margin: 0.2em 0 0.1em;
+}
+
 h2 {
   margin-top: 1em;
   padding-top: 1em;
@@ -17,6 +21,10 @@ h1, h2 {
 
 a {
   color: #e81c4f;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 header {
@@ -38,10 +46,28 @@ header h1 {
   font-weight: 300;
 }
 
+header .lede {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0.75em auto 1.25em;
+  max-width: 42rem;
+}
+
+header .cta-row {
+  margin: 0;
+  display: flex;
+  gap: 0.75em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 header a {
   border: 1px solid #e81c4f;
   border-radius: 290486px;
   color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
   font-size: 0.6em;
   letter-spacing: 0.2em;
   padding: 1em 2em;
@@ -51,15 +77,24 @@ header a {
   transition-property: color, background;
 }
 
+header a .cta-icon {
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
+  flex: 0 0 auto;
+}
+
 header a:hover {
   background: #e81c4f;
   color: white;
+  text-decoration: none;
 }
 
 main {
   margin: 0 auto;
   max-width: 50em;
   margin-bottom: 4em;
+  padding: 0 1.25em;
 }
 
 img {
@@ -77,4 +112,40 @@ code {
   border-bottom: 1px solid #d8dee9;
   color: #a7adba;
   border-left: 2px solid #69c;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0 0;
+  display: grid;
+  gap: 0.9em;
+}
+
+.post-card {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 1em 1.1em;
+  background: white;
+}
+
+.post-card--placeholder {
+  opacity: 0.85;
+}
+
+.post-title {
+  font-size: 1.05em;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+}
+
+.post-title:hover {
+  text-decoration: underline;
+}
+
+.post-meta {
+  margin-top: 0.4em;
+  font-size: 0.9em;
+  color: #666;
 }
