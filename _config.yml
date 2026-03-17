@@ -1,0 +1,19 @@
+title: Thom Shutt
+description: Writing and notes by Thom Shutt.
+author: Thom Shutt
+
+# Custom domain; GitHub Pages will also use /CNAME.
+url: "https://thomshutt.com"
+baseurl: ""
+
+timezone: UTC
+
+# Default permalink style for future posts. Individual posts can override with front matter.
+permalink: /:year/:month/:day/:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+plugins: []
+
