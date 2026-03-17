@@ -97,6 +97,45 @@ main {
   padding: 0 1.25em;
 }
 
+.about-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 1.25em;
+  row-gap: 0.75em;
+}
+
+.about-content h2 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.about-avatar-ring {
+  width: fit-content;
+  margin: 0;
+  padding: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+}
+
+.about-avatar {
+  width: clamp(92px, 16vw, 132px);
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  display: block;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+}
+
+@media (max-width: 680px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
 img {
   margin: 0 auto;
   border: 1px solid #69c;
