@@ -5,7 +5,7 @@ date: 2017-10-01
 tags: [go]
 permalink: /opinionated-logging-in-go.html
 og_title: "5 (Opinionated) Steps to Minimalist Logging in Go"
-og_image: /opinionated-logging-in-go/you-dont-need-levels.jpg
+og_image: /assets/img/opinionated-logging-in-go/you-dont-need-levels.jpg
 ---
 
 In many ways Go is a clean break from our past programming sins, but it feels as though logging is still an area where people cling on to unnecessary practices from other languages.
@@ -16,7 +16,7 @@ They've "Worked For Me"™ in a microservice-based architecture serving tens of 
 
 ## 1. Your Happy Path is a Metric
 
-<img src="opinionated-logging-in-go/rps.jpg"/>
+<img src="/assets/img/opinionated-logging-in-go/rps.jpg"/>
 
 The 'Happy' path through your webapp (2xx response) shouldn't have any logging on it. The only things you care about here are how often it was hit and how long it took to serve a response.
 
@@ -35,7 +35,7 @@ In reality, this is how levels are used:
 
 But the only reason you're looking at logs in the first place is because something's gone wrong. AKA an error. And so:
 
-<img src="opinionated-logging-in-go/you-dont-need-levels.jpg"/>
+<img src="/assets/img/opinionated-logging-in-go/you-dont-need-levels.jpg"/>
 
 Because we're writing webapps, the definition of "something's gone wrong" is "we're returning an HTTP error code". For everything else (e.g retrying failed calls to external APIs), put metrics around it.
 
@@ -49,7 +49,7 @@ This also ties in perfectly with Go's pattern of passing errors up the call stac
 
 Now that you're logging in a single place, it's easy to make sure that your log lines include some context to help you reproduce errors. This means no more tears and recrimination when you hit this in Production:
 
-<img src="opinionated-logging-in-go/baderror.png"/>
+<img src="/assets/img/opinionated-logging-in-go/baderror.png"/>
 
 As a minimum, I go for:
 
@@ -62,7 +62,7 @@ As a minimum, I go for:
 
 If you're doing [structured logging](https://stackify.com/what-is-structured-logging-and-why-developers-need-it/) (and if you're not, why not?) this context will also be useful for quickly tracking down bad subnets/resources/users.
 
-<img src="opinionated-logging-in-go/aggregated.jpg"/>
+<img src="/assets/img/opinionated-logging-in-go/aggregated.jpg"/>
 
 ## 5. Link log lines across services
 

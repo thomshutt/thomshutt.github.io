@@ -3,7 +3,9 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 posts_dir="$repo_root/_posts"
+assets_img_dir="$repo_root/assets/img"
 mkdir -p "$posts_dir"
+mkdir -p "$assets_img_dir"
 
 prompt() {
   local var_name="$1"
@@ -25,6 +27,46 @@ slugify() {
     | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//'
 }
 
+urlencode() {
+  python3 - "$1" <<'PY'
+import sys, urllib.parse
+print(urllib.parse.quote(sys.argv[1]))
+PY
+}
+
+download_header_image() {
+  local query="$1"
+  local output_path="$2"
+  local encoded_query=""
+  encoded_query="$(urlencode "$query")"
+
+  # Use multiple free providers (no API keys) for robustness.
+  # 1) Unsplash source (often good, sometimes 503)
+  # 2) LoremFlickr (tag-based; sometimes blocks)
+  # 3) Picsum (random fallback)
+  local -a urls=(
+    "https://source.unsplash.com/1600x900/?${encoded_query}"
+    "https://loremflickr.com/1600/900/${encoded_query}"
+    "https://picsum.photos/1600/900.jpg"
+  )
+
+  local url=""
+  for url in "${urls[@]}"; do
+    if curl -fsSL \
+      --retry 3 \
+      --retry-all-errors \
+      --retry-delay 1 \
+      --connect-timeout 10 \
+      --max-time 30 \
+      -o "$output_path" \
+      "$url" 2>/dev/null; then
+      return 0
+    fi
+  done
+
+  return 1
+}
+
 today="$(date +%F)"
 
 title=""
@@ -32,6 +74,7 @@ date_ymd=""
 tags_csv=""
 description=""
 permalink=""
+header_image_query=""
 layout="post"
 
 prompt title "Title"
@@ -39,6 +82,7 @@ prompt date_ymd "Date (YYYY-MM-DD)" "$today"
 prompt tags_csv "Tags (comma-separated, optional)" ""
 prompt description "Description (optional, used for meta/OG)" ""
 prompt permalink "Permalink (optional, e.g. /my-post.html or /2026/03/17/my-post/)" ""
+prompt header_image_query "Header image topic (optional, downloads an image)" ""
 
 slug="$(slugify "$title")"
 filename="${date_ymd}-${slug}.md"
@@ -63,6 +107,26 @@ if [[ -n "${tags_csv// /}" ]]; then
   fi
 fi
 
+og_image=""
+header_image=""
+if [[ -n "${header_image_query// /}" ]]; then
+  if command -v curl >/dev/null 2>&1 && command -v python3 >/dev/null 2>&1; then
+    post_asset_dir="$assets_img_dir/$slug"
+    mkdir -p "$post_asset_dir"
+
+    header_image_path="$post_asset_dir/header.jpg"
+    if download_header_image "$header_image_query" "$header_image_path"; then
+      og_image="/assets/img/$slug/header.jpg"
+      header_image="/assets/img/$slug/header.jpg"
+      echo "Downloaded header image: $header_image_path" >&2
+    else
+      echo "Warning: failed to download header image; continuing without it." >&2
+    fi
+  else
+    echo "Warning: curl/python3 not available; skipping header image download." >&2
+  fi
+fi
+
 {
   echo "---"
   echo "layout: ${layout}"
@@ -71,6 +135,8 @@ fi
   echo "tags: ${tags_yaml}"
   [[ -n "$description" ]] && echo "description: \"${description//\"/\\\"}\""
   [[ -n "$permalink" ]] && echo "permalink: ${permalink}"
+  [[ -n "$og_image" ]] && echo "og_image: ${og_image}"
+  [[ -n "$header_image" ]] && echo "header_image: ${header_image}"
   echo "---"
   echo
   echo "Write here."
