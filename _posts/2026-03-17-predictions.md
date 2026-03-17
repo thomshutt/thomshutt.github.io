@@ -41,4 +41,4 @@ After listening to the excellent [LLM predictions for 2026](https://simonwilliso
 
 ## Discuss
 
-Let me know what you do / don't agree with via the [Hacker News post](https://news.ycombinator.com/item?id=15458642)!
+Let me know what you do / don't agree with via the [Hacker News post](https://news.ycombinator.com/item?id=47419056)!
