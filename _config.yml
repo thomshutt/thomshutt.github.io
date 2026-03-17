@@ -17,3 +17,9 @@ kramdown:
 
 plugins: []
 
+defaults:
+  - scope:
+      path: ""
+    values:
+      og_image: /og_image.png
+
