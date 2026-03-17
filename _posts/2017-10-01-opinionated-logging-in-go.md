@@ -5,7 +5,6 @@ date: 2017-10-01
 tags: [go]
 permalink: /opinionated-logging-in-go.html
 og_title: "5 (Opinionated) Steps to Minimalist Logging in Go"
-og_image: /assets/img/opinionated-logging-in-go/you-dont-need-levels.jpg
 ---
 
 In many ways Go is a clean break from our past programming sins, but it feels as though logging is still an area where people cling on to unnecessary practices from other languages.

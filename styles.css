@@ -30,7 +30,7 @@ a:hover {
 header {
   background-color: #263d36;
   background-image: url("header.jpg");
-  background-position: center top;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   line-height: 1.2;
@@ -38,6 +38,21 @@ header {
   text-align: center;
   max-width: none;
   margin-bottom: 2em;
+  position: relative;
+  z-index: 0;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
+  z-index: -1;
+}
+
+header > * {
+  position: relative;
+  z-index: 1;
 }
 
 header h1 {

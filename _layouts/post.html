@@ -2,11 +2,9 @@
 layout: default
 ---
 
-<header>
+<header {% if page.header_img %} style="background-image: url({{ page.header_img }})" {% endif %}>
   <h1>{{ page.title }}</h1>
-  <p>
-    <a href="/">by {{ site.author }}</a>
-  </p>
+  <a href="/">by {{ site.author }}</a>
 </header>
 
 <main>
