@@ -19,10 +19,26 @@ After listening to the excellent [LLM predictions for 2026](https://simonwilliso
 
     *One of the main drivers of people creating new programming languages has always been to make ones that are easier for humans to write, read and understand. With this gone, fewer new languages are created and there's little uptake for those that are. Whether agent-specific languages emerge is something I'm less sure on.*
 
+4. **“Modes” (Plan etc.) disappear**
+
+    *This falls into a general bucket of techniques (MCP servers, Ralph Wiggum loops, masses of markdown files) that I think will seem quaint in hindsight. The harnesses will quickly improve and be able to respond more appropriately and interactively based on input (does this seem like a question?) and confidence level in jumping straight into a solution.*
+
+3. **Agent capabilities commoditise, big players compete on scaffolding and UX**
+
+    *We're already seeing this to some extent, but I think the leading models will become good enough as to be indistinguishable from one another, forcing the major players to find other axes to compete on such as multi-agent orchestration. Simultaneously, open-source models and harnesses will become Good Enough for many use cases.*
+
 3. **Context window size is no longer a blocker, attention still an issue at high context volume**
 
     *Even when you can fit an entire codebase into the model's context, problems will remain with not reusing existing methods and patterns in some cases.*
 
-4. **“Modes” (Plan etc.) disappear**
+5. **Mid tier of open source fades**
 
-    *This falls into a general bucket of techniques (MCP servers, Ralph Wiggum loops, masses of markdown files) that I think will seem quaint in hindsight. The harnesses will quickly improve and be able to respond more appropriately and interactively based on input (does this seem like a question?) and confidence level in jumping straight into a solution.*
+    *Large projects remain, niche / personal projects remain, but a combination of ease of vibe-coding your own solutions (demand side) and reduced need for community contributions (supply side) means we see fewer moderately successful OSS projects.*
+
+6. **Baseline of design rises, good human-led design is still at a premium**
+
+    *Similar to what we saw around the initial [Bootstrap](https://getbootstrap.com) era, agentic tools are letting non-designers get much better baseline results. I think the [Indigo Problem](https://x.com/adamwathan/status/1953510802159219096) will improve, but premium products will still lean heavily on human design.*
+
+## Discuss
+
+Let me know what you do / don't agree with via the [Hacker News post](https://news.ycombinator.com/item?id=15458642)!
