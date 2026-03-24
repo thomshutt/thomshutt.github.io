@@ -99,11 +99,15 @@ if [[ -n "${tags_csv// /}" ]]; then
   cleaned=()
   for t in "${tags_arr[@]}"; do
     tt="$(echo "$t" | sed -E 's/^[[:space:]]+|[[:space:]]+$//g')"
-    [[ -n "$tt" ]] && cleaned+=("\"$tt\"")
+    [[ -n "$tt" ]] && cleaned+=("$tt")
   done
   if [[ "${#cleaned[@]}" -gt 0 ]]; then
-    tags_yaml="[${cleaned[*]}]"
-    tags_yaml="${tags_yaml//\" /\", \"}"
+    tags_yaml="["
+    for i in "${!cleaned[@]}"; do
+      (( i > 0 )) && tags_yaml+=", "
+      tags_yaml+="\"${cleaned[$i]//\"/\\\"}\""
+    done
+    tags_yaml+="]"
   fi
 fi
 
