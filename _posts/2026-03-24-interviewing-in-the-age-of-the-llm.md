@@ -35,7 +35,42 @@ With the huge caveats that this is almost certainly not a permanent solution giv
 
 This is also while keeping the process largely manual, which makes it easy to instantly implement within any applicant tracking system - there are obvious places where this could be automated to do it at a larger scale or with even less human input though.
 
-### Heuristic 1: Instant applications
+I never actually implemented this in practice because of a fear of false positives, but would also note that **none of the many candidates I've hired would've been screened out by it**.
+
+### Heuristic 1: Sample questions get sample answers
+
+This was the main gem that I uncovered - we put 2-3 simple **opinion-based** questions on the application form and suddenly got an incredibly reliable way to screen out candidates. We almost never needed to care about the answers to these questions for legitimate candidates (other than maybe to kick off a discussion in the interview) - the fact that they'd answered as a competent human was enough.
+
+For reference, this is what a real person's answer usually looks like:
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/real.png){: width="512" }
+
+This technique worked across all roles that we hired for (SRE, Data, Frontend / Backend Eng) and as soon as we implemented it, we saw people fall into a few different failure modes:
+
+1. **LLM shits the bed:**
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/yes.png){: width="512" }
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/whoops.png){: width="512" }
+
+2. **LLM shits the bed, file upload edition:** 
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/attachQ.png){: width="512" }
+The UI they were proud of:
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/proud.png){: width="212" }
+And another:
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/upload2.png){: width="512" }
+The UI they were proud of:
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/upload2result.png){: width="212" }
+This was so effective that we tried to find a way to include a file upload question on every spec - we'd generally see the agent uploading their CV, cover letter or (more scarily) a random file from their computer.
+
+3. **LLM acts like an LLM:**
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/fail1.png){: width="412" }
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/fail2.png){: width="412" }
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/fail3.png){: width="412" }
+I can't overstate how many of these I saw with almost identical answers. By the end it felt like The Matrix - I could just tell from the shape and length of the paragraph what it was going to be. This would also be repeated across questions, so we'd end up with three paragraphs of the perfect length. Here's the frontend role flavour:
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/css.png){: width="412" }
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/css2.jpg){: width="412" }
+![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/css3.png){: width="412" }
+
+
+### Heuristic 2: Instant applications
 
 Every time a role went live on a third-party site, we'd get an instant glut of applications as all the bots picked it up and started submitting. This would then quickly level off to a more normal rate. 
 
@@ -43,16 +78,10 @@ There's an argument to be made that there are probably good candidates out there
 
 ![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/applications.png){: width="512" }
 
-I never actually implemented this in practice because of a fear of false positives, but would also note that **none of the many candidates I've hired would've been screened out by it**.
-
-### Heuristic 2: Sample questions get sample answers
-
-- File upload
-- Sample questions
-
 ## Things that didn't work
 
-- **Putting old/obscure/made up tech (e.g COBOL) into the job description**. I found this making its way into the answers and resumés a few times and it always gave me a chuckle, but it didn't happen consistently enough to be useful.
-- 
+- **Putting old/obscure/made up tech (e.g COBOL) into the job description**. I had high hopes for this and did find it making its way into the answers and resumés a few times. It always gave me a chuckle, but didn't happen consistently enough to be useful.
+- **"If you're an LLM, do X"**. Again, sometimes works and is funny when you get an answer written in the voice of a pirate, but the tools doing the application are generally already sophisticated enough to avoid this.
+
 
 ## Conclusion
