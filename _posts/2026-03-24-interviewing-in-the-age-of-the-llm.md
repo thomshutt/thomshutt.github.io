@@ -86,3 +86,7 @@ There's an argument to be made that there are probably good candidates out there
 ## Conclusion
 
 This will probably continue to be a game of cat and mouse, but unless the hiring platforms start building in these checks by default my hope is that it stays niche / under the radar enough that it's not worth the tools adapting for. 
+
+## Discuss
+
+Let me know what you do / don't agree with via the [Hacker News post](https://news.ycombinator.com/item?id=47501968)!
