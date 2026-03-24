@@ -112,6 +112,17 @@ main {
   padding: 0 1.25em;
 }
 
+/* Improve reading rhythm and spacing for long-form posts. */
+main p,
+main ul,
+main ol {
+  margin: 0.95em 0;
+}
+
+main li {
+  margin: 0.55em 0;
+}
+
 .about-layout {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -156,6 +167,16 @@ img {
   border: 1px solid #69c;
   display: block;
   max-width: 90%;
+}
+
+main p img,
+main li img {
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
+}
+
+main img + img {
+  margin-top: 1em;
 }
 
 code {

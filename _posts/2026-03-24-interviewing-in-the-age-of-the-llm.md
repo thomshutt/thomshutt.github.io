@@ -67,7 +67,6 @@ This was so effective that we tried to find a way to include a file upload quest
 I can't overstate how many of these I saw with almost identical answers. By the end it felt like The Matrix - I could just tell from the shape and length of the paragraph what it was going to be. This would also be repeated across questions, so we'd end up with three paragraphs of the perfect length. Here's the frontend role flavour:
 ![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/css.png){: width="412" }
 ![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/css2.jpg){: width="412" }
-![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/css3.png){: width="412" }
 
 
 ### Heuristic 2: Instant applications
@@ -85,3 +84,5 @@ There's an argument to be made that there are probably good candidates out there
 
 
 ## Conclusion
+
+This will probably continue to be a game of cat and mouse, but unless the hiring platforms start building in these checks by default my hope is that it stays niche / under the radar enough that it's not worth the tools adapting for. 
