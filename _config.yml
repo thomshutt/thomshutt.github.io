@@ -18,8 +18,7 @@ kramdown:
 plugins: []
 
 goatcounter:
-  enabled: false
-  # Example: https://yourname.goatcounter.com
+  enabled: true
   site: "https://thomshutt.goatcounter.com"
 
 defaults:
