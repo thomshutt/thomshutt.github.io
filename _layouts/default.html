@@ -15,7 +15,7 @@
   {% endif %}
 
   <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
-  {% if site.goatcounter.enabled and site.goatcounter.site != "" %}
+  {% if site.goatcounter and site.goatcounter.site != "" %}
   <script data-goatcounter="{{ site.goatcounter.site }}/count" async src="//gc.zgo.at/count.js"></script>
   {% endif %}
 </head>

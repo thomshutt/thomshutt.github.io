@@ -18,7 +18,6 @@ kramdown:
 plugins: []
 
 goatcounter:
-  enabled: true
   site: "https://thomshutt.goatcounter.com"
 
 defaults:
