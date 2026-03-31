@@ -1,0 +1,9 @@
+ - id: example-llm-talk
+   title: "Monitoring the internet at scale"
+   date: 2019-10-01
+   description: >
+     A talk on work we did at Brightcove to develop fault detection strategies for high-volume global video delivery.
+   video_path: /talks/monitoring-the-internet-at-scale.mp4
+   poster: /talks/monitoring-the-internet-at-scale.png
+   event: "Brightcove Play (Conference)"
+   duration: "39:21"

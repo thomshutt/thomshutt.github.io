@@ -52,25 +52,205 @@ og_description: Writing and notes by Thom Shutt.
         <p>
           Previously building out high-performing Engineering teams at the <a href="https://www.bbc.co.uk/">BBC</a>, <a href="https://www.brightcove.com/">Brightcove</a> and <a href="https://livepeer.org/">Livepeer</a>.
         </p>
+        <p>
+          You can also watch a selection of talks I’ve given in the Talks tab below.
+        </p>
       </div>
     </div>
   </section>
 
-  <section aria-labelledby="recent-posts">
-    <h2 id="recent-posts">Recent posts</h2>
-    <ul class="post-list">
-      {% for post in site.posts limit: 10 %}
-        <li class="post-card">
-          <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          <div class="post-meta">
-            {% if post.tags and post.tags.size > 0 %}
-              <span>{{ post.tags[0] | capitalize }}</span>
-              <span aria-hidden="true">·</span>
-            {% endif %}
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y" }}</time>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
+  <section aria-labelledby="content-library">
+    <h2 id="content-library">Recent writing and talks</h2>
+    <div class="content-tabs" role="tablist" aria-label="Homepage content sections">
+      <button
+        type="button"
+        class="content-tab-button is-active"
+        role="tab"
+        aria-selected="true"
+        aria-controls="posts-panel"
+        id="posts-tab"
+        data-tab-target="posts-panel"
+      >
+        Posts
+      </button>
+      <button
+        type="button"
+        class="content-tab-button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="talks-panel"
+        id="talks-tab"
+        data-tab-target="talks-panel"
+        tabindex="-1"
+      >
+        Talks
+      </button>
+    </div>
+
+    <div id="posts-panel" class="content-panel is-active" role="tabpanel" aria-labelledby="posts-tab">
+      <ul class="post-list">
+        {% for post in site.posts limit: 10 %}
+          <li class="post-card">
+            <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <div class="post-meta">
+              {% if post.tags and post.tags.size > 0 %}
+                <span>{{ post.tags[0] | capitalize }}</span>
+                <span aria-hidden="true">·</span>
+              {% endif %}
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y" }}</time>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div id="talks-panel" class="content-panel" role="tabpanel" aria-labelledby="talks-tab" hidden>
+      {% if site.data.talks and site.data.talks.size > 0 %}
+        <ul class="talks-list">
+          {% for talk in site.data.talks %}
+            <li class="talk-card">
+              <h3 class="talk-title">{{ talk.title }}</h3>
+              <p class="talk-meta">
+                {% if talk.event %}
+                  <span class="talk-meta-event">{{ talk.event }}</span>
+                  <span aria-hidden="true">·</span>
+                {% endif %}
+                {% if talk.date %}
+                  <time datetime="{{ talk.date | date_to_xmlschema }}">
+                    {{ talk.date | date: "%Y-%m-%d" }}
+                  </time>
+                {% endif %}
+                {% if talk.duration %}
+                  <span aria-hidden="true">·</span>
+                  <span class="talk-meta-duration">{{ talk.duration }}</span>
+                {% endif %}
+              </p>
+
+              {% if talk.description %}
+                <p class="talk-description">
+                  {{ talk.description }}
+                </p>
+              {% endif %}
+
+              {% if talk.video_path %}
+                <div class="talk-video-row">
+                  <video
+                    class="talk-video-inline"
+                    src="{{ talk.video_path | relative_url }}"
+                    {% if talk.poster %}poster="{{ talk.poster | relative_url }}"{% endif %}
+                    controls
+                    preload="metadata"
+                  >
+                    Sorry, your browser doesn’t support embedded videos.
+                  </video>
+                </div>
+              {% endif %}
+
+              <p class="talk-links">
+                {% if talk.slides_url %}
+                  <a href="{{ talk.slides_url }}" target="_blank" rel="noopener">
+                    View slides
+                  </a>
+                {% endif %}
+              </p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No talks published yet.</p>
+      {% endif %}
+    </div>
   </section>
 </main>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll(".content-tab-button");
+    var panels = document.querySelectorAll(".content-panel");
+    if (!tabs.length || !panels.length) return;
+
+    function updateUrlForTab(tab) {
+      if (!window.history || !window.history.replaceState) return;
+      var targetId = tab.getAttribute("data-tab-target");
+
+      // Use a simple hash to reflect the active tab without reloading.
+      if (targetId === "talks-panel") {
+        window.history.replaceState(null, "", "#talks");
+      } else {
+        var urlWithoutHash = window.location.pathname + window.location.search;
+        window.history.replaceState(null, "", urlWithoutHash);
+      }
+    }
+
+    function activateTab(nextTab, options) {
+      var shouldUpdateUrl = !options || options.updateUrl !== false;
+
+      tabs.forEach(function (tab) {
+        var isActive = tab === nextTab;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+        tab.setAttribute("tabindex", isActive ? "0" : "-1");
+      });
+
+      panels.forEach(function (panel) {
+        var isMatch = panel.id === nextTab.getAttribute("data-tab-target");
+        panel.classList.toggle("is-active", isMatch);
+        panel.hidden = !isMatch;
+      });
+
+      if (shouldUpdateUrl) {
+        updateUrlForTab(nextTab);
+      }
+    }
+
+    // Initialise the active tab from the URL hash, if present.
+    (function initialiseFromHash() {
+      var hash = (window.location.hash || "").toLowerCase();
+      var targetId;
+
+      if (hash === "#talks") {
+        targetId = "talks-panel";
+      } else {
+        targetId = "posts-panel";
+      }
+
+      var initialTab = document.querySelector(
+        '.content-tab-button[data-tab-target="' + targetId + '"]'
+      );
+
+      if (initialTab) {
+        activateTab(initialTab, { updateUrl: false });
+      }
+    })();
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activateTab(tab);
+
+        if (
+          tab.getAttribute("data-tab-target") === "talks-panel" &&
+          window.goatcounter &&
+          typeof window.goatcounter.count === "function"
+        ) {
+          window.goatcounter.count({
+            path: window.location.pathname + "#talks-tab",
+            title: "Talks tab",
+            event: true,
+          });
+        }
+      });
+
+      tab.addEventListener("keydown", function (event) {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+        event.preventDefault();
+        var allTabs = Array.prototype.slice.call(tabs);
+        var index = allTabs.indexOf(tab);
+        var offset = event.key === "ArrowRight" ? 1 : -1;
+        var nextIndex = (index + offset + allTabs.length) % allTabs.length;
+        var nextTab = allTabs[nextIndex];
+        activateTab(nextTab);
+        nextTab.focus();
+      });
+    });
+  })();
+</script>

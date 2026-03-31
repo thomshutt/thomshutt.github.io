@@ -197,6 +197,42 @@ code {
   gap: 0.9em;
 }
 
+.content-tabs {
+  margin-top: 1em;
+  display: inline-flex;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  padding: 0.2em;
+  gap: 0.2em;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.content-tab-button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #444;
+  border-radius: 999px;
+  padding: 0.45em 1.1em;
+  font-size: 0.92em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.content-tab-button.is-active {
+  background: #e81c4f;
+  color: #fff;
+}
+
+.content-tab-button:focus-visible {
+  outline: 2px solid #e81c4f;
+  outline-offset: 1px;
+}
+
+.content-panel {
+  margin-top: 0.85em;
+}
+
 .post-card {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 12px;
@@ -224,3 +260,66 @@ code {
   font-size: 0.9em;
   color: #666;
 }
+
+/* Talks */
+
+.talks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1em;
+}
+
+.talk-card {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 1em 1.1em 1.2em;
+  background: #fff;
+}
+
+.talk-title {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.talk-meta {
+  margin: 0.35em 0 0;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.talk-meta-event {
+  font-weight: 500;
+}
+
+.talk-meta-duration {
+  font-variant-numeric: tabular-nums;
+}
+
+.talk-description {
+  margin-top: 0.35em;
+}
+
+.talk-video-row {
+  margin-top: 0.4em;
+}
+
+.talk-video-inline {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: #000;
+
+  /* Keep inline players from becoming a tall wall of video. */
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.talk-links {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+}
+
