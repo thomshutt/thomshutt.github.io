@@ -15,7 +15,8 @@ markdown: kramdown
 kramdown:
   input: GFM
 
-plugins: []
+plugins:
+  - jekyll-sitemap
 
 goatcounter:
   site: "https://thomshutt.goatcounter.com"
