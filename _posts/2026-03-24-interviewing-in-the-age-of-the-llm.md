@@ -31,7 +31,7 @@ Although these candidates will generally fall apart on a more in-depth technical
 
 ## What's the solution?
 
-With the huge caveats that this is almost certainly not a permanent solution given the rate of LLM advancement and that as with any heuristic method there are chances of false positives, I've found this technique incredibly effective in driving my daily resumé screening task down to **less than 10 minutes** and bringing our rate of candidates that make it past the initial phone screen to **over 90%** and bringing the number of active scam candidates that made it this for **to zero**. 
+With the huge caveats that this is almost certainly not a permanent solution given the rate of LLM advancement and that as with any heuristic method there are chances of false positives, I've found this technique incredibly effective in driving my daily resumé screening task down to **less than 10 minutes**, bringing our rate of candidates that make it past the initial phone screen to **over 90%** and bringing the number of **active scam candidates** that made it this far **to zero**. 
 
 This is also while keeping the process largely manual, which makes it easy to instantly implement within any applicant tracking system - there are obvious places where this could be automated to do it at a larger scale or with even less human input though.
 
