@@ -7,9 +7,13 @@
   <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
   <meta name="author" content="{{ site.author }}">
 
+  {% assign canonical_url = page.canonical | default: page.url | absolute_url %}
+  <link rel="canonical" href="{{ canonical_url }}">
+
   <meta property="og:site_name" content="{{ site.title }}"/>
   <meta property="og:title" content="{% if page.og_title %}{{ page.og_title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}"/>
   <meta property="og:description" content="{% if page.og_description %}{{ page.og_description }}{% elsif page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}"/>
+  <meta property="og:url" content="{{ canonical_url }}"/>
   {% if page.og_image %}
   <meta property="og:image" content="{{ page.og_image | relative_url }}"/>
   {% endif %}
