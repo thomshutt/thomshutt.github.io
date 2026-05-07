@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /googlefc347ce9c0b57e7b.html
+
+Sitemap: https://thomshutt.com/sitemap.xml
