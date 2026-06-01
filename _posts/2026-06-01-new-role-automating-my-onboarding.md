@@ -4,8 +4,8 @@ title: "Using Cursor Automations to onboard faster"
 date: 2026-06-01
 tags: ["automation", "fastly", "onboarding", "cursor", "brevo"]
 description: "How I used Cursor and Brevo to get up to speed faster with a large org's codebase"
-og_image: /assets/img/new-role-automating-my-onboarding/header.png
-header_image: /assets/img/new-role-automating-my-onboarding/header.png
+og_image: /assets/img/2026-06-01-new-role-automating-my-onboarding/header.png
+header_image: /assets/img/2026-06-01-new-role-automating-my-onboarding/header.png
 ---
 
 # Using Cursor Automations to onboard faster
