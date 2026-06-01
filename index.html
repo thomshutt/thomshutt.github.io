@@ -8,7 +8,7 @@ og_description: Writing and notes by Thom Shutt.
 
 <header>
   <h1>Thom Shutt</h1>
-  <p class="lede">Blog posts and projects.</p>
+  <p class="lede">Blog posts and projects</p>
   <p class="cta-row">
     <a href="https://github.com/thomshutt">
       <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -48,6 +48,9 @@ og_description: Writing and notes by Thom Shutt.
         <h2 id="about">About</h2>
         <p>
           I’m Thom, an Engineering leader based in the UK with over 15 years of experience building and scaling high-traffic systems.
+        </p>
+        <p>
+          Currently working on global edge compute and delivery at <a href="https://www.fastly.com/">Fastly</a>.
         </p>
         <p>
           Previously building out high-performing Engineering teams at the <a href="https://www.bbc.co.uk/">BBC</a>, <a href="https://www.brightcove.com/">Brightcove</a> and <a href="https://livepeer.org/">Livepeer</a>.
@@ -95,8 +98,8 @@ og_description: Writing and notes by Thom Shutt.
                 {% for tag in post.tags %}
                   <span aria-hidden="true">·</span>  
                   {% assign tag_lower = tag | downcase %}
-                  {% if tag_lower == 'ai' %}
-                    <span>AI</span>
+                  {% if tag_lower == 'ai' or tag_lower == 'llm' or tag_lower == 'llms' %}
+                    <span>{{ tag }}</span>
                   {% else %}
                     <span>{{ tag | capitalize }}</span>
                   {% endif %}
