@@ -35,8 +35,6 @@ With the huge caveats that this is almost certainly not a permanent solution giv
 
 This is also while keeping the process largely manual, which makes it easy to instantly implement within any applicant tracking system - there are obvious places where this could be automated to do it at a larger scale or with even less human input though.
 
-I never actually implemented this in practice because of a fear of false positives, but would also note that **none of the many candidates I've hired would've been screened out by it**.
-
 ### Heuristic 1: Sample questions get sample answers
 
 This was the main gem that I uncovered - we put 2-3 simple **opinion-based** questions on the application form and suddenly got an incredibly reliable way to screen out candidates. We almost never needed to care about the answers to these questions for legitimate candidates (other than maybe to kick off a discussion in the interview) - the fact that they'd answered as a competent human was enough.
@@ -74,6 +72,8 @@ I can't overstate how many of these I saw with almost identical answers. By the 
 Every time a role went live on a third-party site, we'd get an instant glut of applications as all the bots picked it up and started submitting. This would then quickly level off to a more normal rate. 
 
 There's an argument to be made that there are probably good candidates out there that are using automation or that happen to see the posting as soon as it goes live, but in terms of simplicity versus impact, I think that screening out these candidates by default is probably the biggest effort vs. impact lever you can pull. At the least, you could feed it in as a negative signal to your overall decision.
+
+I never actually implemented this in practice because of a fear of false positives, but would also note that **none of the many candidates I've hired would've been screened out by it**.
 
 ![](/assets/img/2026-03-24-interviewing-in-the-age-of-the-llm/applications.png){: width="512" }
 
